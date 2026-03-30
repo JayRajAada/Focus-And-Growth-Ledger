@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,8 +6,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
-        List<Book> library = new ArrayList<>();
-        List<Insight> insights = new ArrayList<>();
+        List<Book> library = DataManager.loadBooks();
+        List<Insight> insights = DataManager.loadInsights();
 
         System.out.println("=====================================");
         System.out.println("  Welcome to the Growth Journal ");
@@ -18,7 +17,7 @@ public class Main {
             System.out.println("\n--- Main Menu ---");
             System.out.println("1. Log a new Book or Insight");
             System.out.println("2. Start Focus Session (Coming Soon)");
-            System.out.println("3. View Growth Dashboard (View Insights)");
+            System.out.println("3. View Growth Dashboard");
             System.out.println("4. Exit");
             System.out.print("Choose an option: ");
 
@@ -38,7 +37,6 @@ public class Main {
                         System.out.print("Enter author: ");
                         String author = scanner.nextLine();
                         
-                        // Create a new Book object and add it to the list
                         library.add(new Book(title, author));
                         System.out.println("Success! Book added to your library.");
                         
@@ -63,18 +61,39 @@ public class Main {
                     break;
                     
                 case "3":
-                    System.out.println("\n--- Your Logged Insights ---");
-                    if (insights.isEmpty()) {
-                        System.out.println("No insights logged yet. Go read a book!");
-                    } else {
-                        for (Insight insight : insights) {
-                            System.out.println(insight.toString());
+                    System.out.println("\n--- Growth Dashboard ---");
+                    System.out.println("A. View My Library (Books)");
+                    System.out.println("B. View My Insights (Quotes)");
+                    System.out.print("What would you like to view? ");
+                    String viewChoice = scanner.nextLine().toUpperCase();
+
+                    if (viewChoice.equals("A")) {
+                        if (library.isEmpty()) {
+                            System.out.println("Your library is empty. Go add a book!");
+                        } else {
+                            System.out.println("\n=== MY LIBRARY ===");
+                            for (Book b : library) {
+                                System.out.println(b.toString());
+                            }
                         }
+                    } else if (viewChoice.equals("B")) {
+                        if (insights.isEmpty()) {
+                            System.out.println("No insights logged yet.");
+                        } else {
+                            System.out.println("\n=== MY INSIGHTS ===");
+                            for (Insight i : insights) {
+                                System.out.println(i.toString());
+                            }
+                        }
+                    } else {
+                        System.out.println("Invalid choice. Returning to menu.");
                     }
                     break;
                     
                 case "4":
                     System.out.println("Saving data... Exiting. Keep growing!");
+                    DataManager.saveInsights(insights);
+                    DataManager.saveBooks(library);
                     running = false;
                     break;
                     

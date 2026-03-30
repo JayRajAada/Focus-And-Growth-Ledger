@@ -1,7 +1,11 @@
-public class Insight {
+import java.io.Serializable;
+
+public class Insight implements Serializable {
+    private static final long serialVersionUID = 1L; 
+
     private String bookTitle;
-    private String content; // The actual quote or thought
-    private String tag;     // e.g., "philosophy", "communication", "life-lesson"
+    private String content;
+    private String tag;
 
     public Insight(String bookTitle, String content, String tag) {
         this.bookTitle = bookTitle;
