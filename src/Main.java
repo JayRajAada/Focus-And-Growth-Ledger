@@ -16,9 +16,8 @@ public class Main {
         while (running) {
             System.out.println("\n--- Main Menu ---");
             System.out.println("1. Log a new Book or Insight");
-            System.out.println("2. Start Focus Session (Pomodoro Timer)");
-            System.out.println("3. View Growth Dashboard");
-            System.out.println("4. Exit");
+            System.out.println("2. View Growth Dashboard");
+            System.out.println("3. Exit");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -57,27 +56,6 @@ public class Main {
                     break;
                     
                 case "2":
-                    // Start the timer
-                    FocusTimer.startSession(scanner);
-                    
-                    // Immediately ask to log an insight after the session ends
-                    System.out.println("\nWould you like to log an insight from this session? (Y/N)");
-                    String logChoice = scanner.nextLine().toUpperCase();
-                    
-                    if (logChoice.equals("Y")) {
-                        System.out.print("Enter the book or topic you were studying: ");
-                        String sessionBook = scanner.nextLine();
-                        System.out.print("Enter your biggest takeaway/insight: ");
-                        String sessionContent = scanner.nextLine();
-                        System.out.print("Enter a tag: ");
-                        String sessionTag = scanner.nextLine();
-                        
-                        insights.add(new Insight(sessionBook, sessionContent, sessionTag));
-                        System.out.println("Success! Session insight logged.");
-                    }
-                    break;
-                    
-                case "3":
                     System.out.println("\n--- Growth Dashboard ---");
                     System.out.println("A. View My Library (Books)");
                     System.out.println("B. View My Insights (Quotes)");
@@ -107,7 +85,7 @@ public class Main {
                     }
                     break;
                     
-                case "4":
+                case "3":
                     System.out.println("Saving data... Exiting. Keep growing!");
                     DataManager.saveInsights(insights);
                     DataManager.saveBooks(library);
@@ -115,7 +93,7 @@ public class Main {
                     break;
                     
                 default:
-                    System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+                    System.out.println("Invalid choice. Please enter a number from 1 to 3.");
             }
         }
         
