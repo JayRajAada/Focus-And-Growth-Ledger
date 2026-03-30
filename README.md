@@ -23,3 +23,4 @@ To run this application, you must have the **Java Development Kit (JDK)** instal
 1. **Clone the repository** to your local machine:
    ```bash
    git clone [https://github.com/JayRajAada/Focus-And-Growth-Ledger.git](https://github.com/JayRajAada/Focus-And-Growth-Ledger.git)
+   ```
